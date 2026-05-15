@@ -33,7 +33,10 @@ const installByName: Record<string, string> = {
 
 export default function CompatibilityStrip() {
   return (
-    <section className="border-t border-white/[0.06] bg-ink-950/60 backdrop-blur">
+    <section
+      data-progress="false"
+      className="border-t border-white/[0.06] bg-ink-950/60 backdrop-blur"
+    >
       <div className="container-page py-10">
         <p className="text-center text-[11px] uppercase tracking-[0.28em] text-slate-500">
           {compatibility.title}
