@@ -98,7 +98,7 @@ export const whyItMatters = {
     {
       icon: "Wallet",
       title: "Input dominates the bill",
-      body: "Most teams burn 40–50% of context on tool schemas alone. Output compression (Caveman) only touches the cheapest tokens.",
+      body: "Most teams burn 40–50% of context on tool schemas alone. Output compression only touches the cheapest tokens.",
     },
     {
       icon: "Zap",
@@ -230,7 +230,7 @@ export const faq = {
     },
     {
       q: "How does it actually save tokens?",
-      a: "Five layers: (L0) lazy schemas serve terse one-liners up front and full docs on demand; (L1) graph queries replace file dumps with 200-token subgraphs; (L2) tree-sitter AST extraction compresses files to imports + signatures, with SHA-256 dedup on rereads; (L3) JSON responses become TOON pipe-delimited tables; (L4) output compression is recommended via Caveman as an external integration.",
+      a: "Five layers: (L0) lazy schemas serve terse one-liners up front and full docs on demand; (L1) graph queries replace file dumps with 200-token subgraphs; (L2) tree-sitter AST extraction compresses files to imports + signatures, with SHA-256 dedup on rereads; (L3) JSON responses become TOON pipe-delimited tables; (L4) output compression can be enabled as an optional final pass.",
     },
     {
       q: "Which IDEs and agents does it support?",
