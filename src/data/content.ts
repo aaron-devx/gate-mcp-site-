@@ -19,10 +19,10 @@ export const navLinks = [
 
 export const hero = {
   eyebrow: "Local MCP Server · 5-Layer Compression",
-  headline: ["Save 37–99% of input tokens", "before they hit the API."],
+  headline: ["Cut 37–99% of tool-result tokens", "before they hit the model."],
   sub: "Gate-MCP is a single local MCP server that compresses context at 5 layers of the pipeline — tool schemas, code navigation, file reads, JSON responses, and images — so your AI assistant sees the signal, not the bloat.",
-  stat: { value: 89, suffix: "%", label: "Tokens saved on a typical coding turn" },
-  ctaPrimary: { label: "Install with npx", href: "#how-it-works" },
+  stat: { value: 89, suffix: "%", label: "Modeled reduction on a typical coding turn" },
+  ctaPrimary: { label: "Install from npm", href: "#how-it-works" },
   ctaSecondary: { label: "See the savings", href: "#use-cases" },
 } as const;
 
@@ -62,7 +62,7 @@ export const useCases = {
   highlight: {
     value: 89,
     suffix: "%",
-    label: "Average per-turn token reduction in the validated benchmark",
+    label: "Modeled per-turn example — when the agent calls Gate tools",
   },
 } as const;
 
@@ -98,7 +98,7 @@ export const whyItMatters = {
     {
       icon: "Wallet",
       title: "Input dominates the bill",
-      body: "Most teams burn 40–50% of context on tool schemas alone. Output compression only touches the cheapest tokens.",
+      body: "Most teams burn 40–50% of context on tool schemas alone. Gate shrinks what tools send in; it never rewrites model output.",
     },
     {
       icon: "Zap",
@@ -179,9 +179,10 @@ export const howItWorks = {
   ],
   installSnippet: `{
   "mcpServers": {
-    "gate": {
-      "command": "npx",
-      "args": ["-y", "gate-mcp"]
+    "gatemcp": {
+      "command": "gatemcp",
+      "args": [],
+      "env": { "GATE_PROJECT_ROOT": "/absolute/path/to/your/repo" }
     }
   }
 }`,
@@ -193,8 +194,8 @@ export const builtWithCursor = {
   subtitle:
     "Gate-MCP is built around day-to-day shipping reality: fewer token bottlenecks, cleaner context, and faster iteration from first prompt to merged PR.",
   stats: [
-    { value: "1,620", label: "Lines of code in the MCP server" },
-    { value: "63 / 63", label: "Tests passing on the validated benchmark" },
+    { value: "Local", label: "No cloud, no telemetry, SQLite cache on disk" },
+    { value: "49 / 49", label: "Unit tests passing, plus multi-repo and adversarial QA" },
     { value: "8 ms", label: "Graph query on VSCode's 6,115 TS files" },
   ],
   items: [
@@ -226,11 +227,11 @@ export const faq = {
   items: [
     {
       q: "What is Gate-MCP?",
-      a: "Gate-MCP is a local MCP (Model Context Protocol) server that sits between your AI coding assistant and the model. It compresses context at 5 layers simultaneously — tool schemas, code navigation, file reads, JSON responses, and images — so you spend 37–99% fewer input tokens for the same answers.",
+      a: "Gate-MCP is a local MCP (Model Context Protocol) server that sits between your AI coding assistant and the model. It compresses context at 5 layers simultaneously — tool schemas, code navigation, file reads, JSON responses, and images — so Gate tool results are 37–99% smaller than the raw files and JSON they replace. It only affects tools your agent actually calls — not your prompts, chat history, or the model's output.",
     },
     {
       q: "How does it actually save tokens?",
-      a: "Five layers: (L0) lazy schemas serve terse one-liners up front and full docs on demand; (L1) graph queries replace file dumps with 200-token subgraphs; (L2) tree-sitter AST extraction compresses files to imports + signatures, with SHA-256 dedup on rereads; (L3) JSON responses become TOON pipe-delimited tables; (L4) output compression can be enabled as an optional final pass.",
+      a: "Five layers: (L0) lazy schemas serve terse one-liners up front and full docs on demand; (L1) graph queries replace file dumps with 200-token subgraphs; (L2) tree-sitter AST extraction compresses files to imports + signatures, with SHA-256 dedup on rereads; (L3) JSON responses become TOON pipe-delimited tables; (L4) a required SQLite cache keeps dedup and memory across restarts. Gate never compresses model output or generated code.",
     },
     {
       q: "Which IDEs and agents does it support?",
@@ -242,11 +243,11 @@ export const faq = {
     },
     {
       q: "Is my code private?",
-      a: "Yes. Gate-MCP runs locally on your machine. Zero cloud, zero ML models, 10 dependencies total. Your code never leaves your laptop unless your agent itself sends it to its provider — and Gate-MCP makes that payload dramatically smaller.",
+      a: "Yes. Gate-MCP runs locally on your machine. Zero cloud, zero telemetry, zero ML models. Your code never leaves your laptop unless your agent itself sends it to its provider — and Gate-MCP makes that payload dramatically smaller.",
     },
     {
       q: "How do I install it?",
-      a: "Add it to your agent's MCP config with command 'npx' and args ['-y', 'gate-mcp']. Or install globally with 'npm install -g gate-mcp'. Restart your agent and the next turn is gated. The repo is MIT licensed at github.com/Dukeabaddon/Gate-MCP.",
+      a: "Install the npm package @gatemcp/cli globally (the README has the exact one-line command — it approves the native SQLite build). Then add command 'gatemcp' to your agent's MCP config and restart. If you use nvm or several Node versions, point the config at the same Node binary that installed Gate. The repo is MIT licensed at github.com/Dukeabaddon/Gate-MCP.",
     },
   ],
 } as const;
